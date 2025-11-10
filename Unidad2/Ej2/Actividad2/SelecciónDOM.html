@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionando el DOM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            margin-bottom: 15px;
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .product {
+            background: #ecf0f1;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .product.especial {
+            background: #fff9e6;
+            border-left-color: #f39c12;
+        }
+        
+        .product.destacado {
+            background: #e8f8f5;
+            border-left-color: #27ae60;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        button.danger {
+            background: #e74c3c;
+        }
+        
+        button.danger:hover {
+            background: #c0392b;
+        }
+        
+        .resultado {
+            background: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            border: 1px solid #bdc3c7;
+            min-height: 60px;
+        }
+        
+        .info-box {
+            background: #ecf0f1;
+            padding: 15px;
+            border-left: 4px solid #95a5a6;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Métodos de Selección del DOM</h1>
+        
+        <div class="info-box">
+            <strong>📝 Nota:</strong> Esta actividad te mostrará los 4 métodos principales para seleccionar elementos. Practica con cada uno y observa qué sucede.
+        </div>
+        
+        <div class="grid">
+            <!-- Panel de Productos -->
+            <div class="card">
+                <h3>📦 Productos en Stock</h3>
+                
+                <div class="product" id="producto-1">
+                    Laptop Dell (ID: producto-1)
+                </div>
+                <div class="product especial" id="producto-2">
+                    Mouse Logitech (ID: producto-2)
+                </div>
+                <div class="product destacado" id="producto-3">
+                    Teclado Mecánico (ID: producto-3)
+                </div>
+                <div class="product">
+                    Monitor 27" (clase: producto)
+                </div>
+                <div class="product especial">
+                    Webcam HD (clases: producto, especial)
+                </div>
+            </div>
+            
+            <!-- Panel de Selectores -->
+            <div class="card">
+                <h3>🎯 Practica Selectores</h3>
+                
+                <p style="margin-bottom: 15px; color: #555;">
+                    <strong>Botón 1: getElementById()</strong><br>
+                    <small>Selecciona por atributo ID (único)</small>
+                </p>
+                <button onclick="usarGetElementById()">
+                    Seleccionar #producto-1
+                </button>
+                <div class="resultado" id="resultado1"></div>
+                
+                <p style="margin: 20px 0 15px; color: #555;">
+                    <strong>Botón 2: getElementsByClassName()</strong><br>
+                    <small>Selecciona por clase (puede haber varios)</small>
+                </p>
+                <button onclick="usarGetElementsByClassName()">
+                    Seleccionar .especial
+                </button>
+                <div class="resultado" id="resultado2"></div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <!-- querySelector/querySelectorAll -->
+            <div class="card">
+                <h3>🎨 Selectores CSS (querySelector)</h3>
+                
+                <p style="margin-bottom: 15px; color: #555;">
+                    <strong>querySelector (primer match)</strong><br>
+                    <small>Selecciona el primer elemento que coincida</small>
+                </p>
+                <button onclick="usarQuerySelector()">
+                    querySelector('.product')
+                </button>
+                <div class="resultado" id="resultado3"></div>
+                
+                <p style="margin: 20px 0 15px; color: #555;">
+                    <strong>querySelectorAll (todos)</strong><br>
+                    <small>Selecciona todos los elementos que coincidan</small>
+                </p>
+                <button onclick="usarQuerySelectorAll()">
+                    querySelectorAll('.product')
+                </button>
+                <div class="resultado" id="resultado4"></div>
+            </div>
+            
+            <!-- Métodos Especiales -->
+            <div class="card">
+                <h3>🔗 Navegación del DOM</h3>
+                
+                <p style="margin-bottom: 15px; color: #555;">
+                    <strong>parentElement</strong><br>
+                    <small>Obtén el padre de un elemento</small>
+                </p>
+                <button onclick="usarParentElement()">
+                    Padre de #producto-2
+                </button>
+                <div class="resultado" id="resultado5"></div>
+                
+                <p style="margin: 20px 0 15px; color: #555;">
+                    <strong>children / nextElementSibling</strong><br>
+                    <small>Navega entre hermanos</small>
+                </p>
+                <button onclick="usarSiblings()">
+                    Hermano de #producto-1
+                </button>
+                <div class="resultado" id="resultado6"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="Actividad2.js"></script>
+</body>
+</html>

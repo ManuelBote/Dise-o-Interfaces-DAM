@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperativo vs. Declarativo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .panel h2 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+        }
+        
+        .imperativo h2 {
+            color: #e74c3c;
+            border-bottom-color: #e74c3c;
+        }
+        
+        .declarativo h2 {
+            color: #27ae60;
+            border-bottom-color: #27ae60;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border-left: 4px solid;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+        
+        .imperativo .code-block {
+            border-left-color: #e74c3c;
+        }
+        
+        .declarativo .code-block {
+            border-left-color: #27ae60;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .demo-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-imperativo {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-imperativo:hover {
+            background: #c0392b;
+        }
+        
+        .btn-declarativo {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-declarativo:hover {
+            background: #229954;
+        }
+        
+        #resultado {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Entendiendo: Imperativo vs. Declarativo</h1>
+        
+        <div class="comparison">
+            <div class="panel imperativo">
+                <h2>IMPERATIVO (Cómo)</h2>
+                <p><strong>Dices paso a paso cómo hacerlo</strong></p>
+                <div class="code-block">
+// 1. Crear
+const lista = document.createElement('ul');
+
+// 2. Crear items
+const item1 = document.createElement('li');
+item1.textContent = 'Ana';
+
+// 3. Agregar
+lista.appendChild(item1);
+
+// 4. Repetir...
+                </div>
+                <p style="margin-top: 15px; color: #555;"><strong>✅ Ventajas:</strong></p>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Control total</li>
+                    <li>Flexible</li>
+                </ul>
+                <p style="margin-top: 10px; color: #555;"><strong>❌ Desventajas:</strong></p>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Código verboso</li>
+                    <li>Difícil de mantener</li>
+                </ul>
+            </div>
+            
+            <div class="panel declarativo">
+                <h2>DECLARATIVO (Qué)</h2>
+                <p><strong>Dices solo el resultado final</strong></p>
+                <div class="code-block">
+&lt;ul&gt;
+  &lt;li&gt;Ana&lt;/li&gt;
+  &lt;li&gt;Luis&lt;/li&gt;
+&lt;/ul&gt;
+
+// El navegador se encarga
+// del resto
+                </div>
+                <p style="margin-top: 15px; color: #555;"><strong>✅ Ventajas:</strong></p>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Código limpio</li>
+                    <li>Fácil de leer</li>
+                </ul>
+                <p style="margin-top: 10px; color: #555;"><strong>❌ Desventajas:</strong></p>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Menos control</li>
+                    <li>Menos flexible</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h3>🔨 Demo Interactiva: Construyendo una Lista</h3>
+            <div class="button-group">
+                <button class="btn-imperativo" onclick="construirImperativo()">Construir (IMPERATIVO)</button>
+                <button class="btn-declarativo" onclick="construirDeclarativo()">Construir (DECLARATIVO)</button>
+                <button onclick="limpiar()" style="background: #95a5a6; color: white;">Limpiar</button>
+            </div>
+            <div id="resultado">
+                <p style="color: #7f8c8d; text-align: center; padding-top: 30px;">Los resultados aparecerán aquí...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="actividad1.js"></script>
+</body>
+</html>
