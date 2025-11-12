@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear y Modificar Elementos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        button.danger {
+            background: #e74c3c;
+        }
+        
+        button.danger:hover {
+            background: #c0392b;
+        }
+        
+        .lista-tareas {
+            list-style: none;
+        }
+        
+        .tarea {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tarea:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+        
+        .tarea.completada {
+            opacity: 0.6;
+            text-decoration: line-through;
+            background: #d4edda;
+            border-left-color: #27ae60;
+        }
+
+        .tarea.pasada {
+            opacity: 0.6;
+            background: #ebb8b3;
+            border-left-color: #d33322;
+        }
+        
+        .tarea-acciones {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .btn-pequeno {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tarjeta-color {
+            height: 150px;
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tarjeta-color:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tarjeta-color .eliminar {
+            align-self: flex-end;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .contador {
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .galeria {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Creando y Modificando Elementos del DOM</h1>
+        
+        <!-- EJERCICIO 1: Lista de Tareas -->
+        <div class="card">
+            <h2>📝 Ejercicio 1: Lista de Tareas Dinámica</h2>
+            
+            <div class="input-group">
+                <input type="text" id="tareaInput" placeholder="Escribe una nueva tarea...">
+                <input type="date" id="fechaInput" placeholder="Fecha limite">
+                <button onclick="agregarTarea()">Agregar Tarea</button>
+            </div>
+            
+            <ul class="lista-tareas" id="listaTareas">
+                <!-- Las tareas se agregarán aquí dinámicamente -->
+            </ul>
+            
+            <div class="contador" id="contadorTareas">0 tareas</div>
+        </div>
+        
+
+        <!-- EJERCICIO 2: Generador de Tarjetas de Color -->
+        <div class="card">
+            <h2>🎨 Ejercicio 2: Creacion de galeria</h2>
+            
+            <div class="input-group">
+                <input type="text" id="urlImagen" placeholder="URL de imagen">
+                <input type="text" id="descripcion" placeholder="Descripción">
+                <button onclick="agregarImagen()">Añadir Imagen</button>
+                <button class="danger" onclick="limpiarImagenes()">Limpiar Imagenes</button>
+            </div>
+            
+            <div class="galeria" id="galeria">
+                <!-- Las imagenes se generarán aquí -->
+            </div>
+        </div>
+        
+        <!-- EJERCICIO 3: Tabla de Contactos -->
+        <div class="card">
+            <h2>👥 Ejercicio 3: Tabla de Contactos Dinámica</h2>
+            
+            <div class="input-group">
+                <input type="text" id="nombre" placeholder="Nombre">
+                <input type="text" id="email" placeholder="Email">
+                <button onclick="agregarContacto()">Agregar Contacto</button>
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse;" id="tablaContactos">
+                <thead>
+                    <tr style="background: #667eea; color: white;">
+                        <th style="padding: 10px; border: 1px solid #ccc; text-align: left;">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ccc; text-align: left;">Email</th>
+                        <th style="padding: 10px; border: 1px solid #ccc; text-align: center;">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+                    <!-- Los contactos se agregarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="actividad3.js"></script>
+</body>
+</html>
