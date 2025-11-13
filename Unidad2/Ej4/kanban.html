@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero Kanban - Proyecto Integrador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .input-nueva-tarea {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-nueva-tarea input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .input-nueva-tarea button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .input-nueva-tarea button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .columna {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .columna-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .columna-header h2 {
+            color: #667eea;
+            font-size: 18px;
+        }
+        
+        .contador {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .tareas-container {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .tarjeta-tarea {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: grab;
+        }
+        
+        .tarjeta-tarea:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tarjeta-tarea:active {
+            cursor: grabbing;
+        }
+        
+        .tarjeta-titulo {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .tarjeta-prioridad {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .prioridad-alta {
+            background: #ffe6e6;
+            color: #c0392b;
+        }
+        
+        .prioridad-media {
+            background: #fff4e6;
+            color: #e67e22;
+        }
+        
+        .prioridad-baja {
+            background: #e6f3ff;
+            color: #3498db;
+        }
+        
+        .tarjeta-acciones {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-accion {
+            flex: 1;
+            padding: 6px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-siguiente {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-siguiente:hover {
+            background: #229954;
+        }
+        
+        .btn-anterior {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-anterior:hover {
+            background: #2980b9;
+        }
+        
+        .btn-eliminar {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-eliminar:hover {
+            background: #c0392b;
+        }
+
+        .btn-modificar{
+            background:#003c79;
+            color:  white;
+        }
+        
+        .btn-modificar:hover{
+            background:#0052a3;
+        }
+        
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Tablero Kanban - Gestor de Tareas</h1>
+        <div class="input-nueva-tarea">
+            <input type="text" id="nuevaTarea" placeholder="Escribe una nueva tarea...">
+            <input type="text" id="responsable" placeholder="Escribe el responsable...">
+            <select id="prioridad">
+                <option value="baja">Baja</option>
+                <option value="media" selected>Media</option>
+                <option value="alta">Alta</option>
+            </select>
+            <button onclick="agregarTareaKanban()">Agregar</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Columna: Por Hacer -->
+        <div class="columna" id="col-porhacer">
+            <div class="columna-header">
+                <h2>📋 Por Hacer</h2>
+                <span class="contador" id="count-porhacer">0</span>
+            </div>
+            <div class="tareas-container" id="tareas-porhacer">
+                <!-- Las tareas se agregarán aquí -->
+            </div>
+        </div>
+        
+        <!-- Columna: En Progreso -->
+        <div class="columna" id="col-enprogreso">
+            <div class="columna-header">
+                <h2>⚙️ En Progreso</h2>
+                <span class="contador" id="count-enprogreso">0</span>
+            </div>
+            <div class="tareas-container" id="tareas-enprogreso">
+                <!-- Las tareas se agregarán aquí -->
+            </div>
+        </div>
+        
+        <!-- Columna: Completado -->
+        <div class="columna" id="col-completado">
+            <div class="columna-header">
+                <h2>✅ Completado</h2>
+                <span class="contador" id="count-completado">0</span>
+            </div>
+            <div class="tareas-container" id="tareas-completado">
+                <!-- Las tareas se agregarán aquí -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <h3>📈 Estadísticas</h3>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" id="stat-total">0</div>
+                <div class="stat-label">Tareas Totales</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-completadas">0</div>
+                <div class="stat-label">Completadas</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-pendientes">0</div>
+                <div class="stat-label">Pendientes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-progreso">0%</div>
+                <div class="stat-label">Progreso</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <h3>📈 Estadísticas</h3>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" id="stat-total">0</div>
+                <div class="stat-label">Prioridad Baja</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-completadas">0</div>
+                <div class="stat-label">Prioridad Media</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-pendientes">0</div>
+                <div class="stat-label">Prioridad Alta</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="actividad4.js"></script>
+</body>
+</html>
