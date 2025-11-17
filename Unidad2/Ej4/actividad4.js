@@ -134,11 +134,21 @@ function actualizarEstadisticas() {
     const completadas = estadoTareas.completado.length;
     const pendientes = total - completadas;
     const progreso = total === 0 ? 0 : Math.round((completadas / total) * 100);
+
+    const baja = document.querySelectorAll('.prioridad-baja').length;
+    const media = document.querySelectorAll('.prioridad-media').length;
+    const alta = document.querySelectorAll('.prioridad-alta').length;
+
     
     document.getElementById('stat-total').textContent = total;
     document.getElementById('stat-completadas').textContent = completadas;
     document.getElementById('stat-pendientes').textContent = pendientes;
     document.getElementById('stat-progreso').textContent = progreso + '%';
+
+    document.getElementById('stat-pBaja').textContent = baja;
+    document.getElementById('stat-pMedia').textContent = media;
+    document.getElementById('stat-pAlta').textContent = alta;
+
 }
 
 // Permitir Enter en el input
