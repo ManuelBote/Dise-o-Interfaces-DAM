@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookNest</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-left">
+          <img src="img/book_icon.png" alt="Logotipo BookNest" id="imgBook" />
+          <h1>BookNest</h1>
+        </div>
+
+        <ul class="nav-center">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#form-libro">Añadir libro</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <button id="btnLogin" aria-haspopup="dialog">Login</button>
+          <img
+            src="images (1).png"
+            alt="Usuario no autenticado"
+            id="imgProfile"
+          />
+        </div>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="intro">
+        <h2>Tu biblioteca digital</h2>
+        <p>
+          Gestiona tus libros favoritos, añade nuevos títulos y descubre
+          lecturas recomendadas.
+        </p>
+      </section>
+
+      <section id="catalogo" aria-label="Lista de libros">
+        <h2>Catálogo</h2>
+        <ul id="listaLibros">
+          <li>España en un buen rumbo - Algun Iluminao (4021)</li>
+          <li>Don Quijote de la Mancha - Miguel de Cervantes (1605)</li>
+        </ul>
+      </section>
+
+      <section id="form-libro" aria-label="Formulario para añadir libros">
+        <h2>Añadir nuevo libro</h2>
+        <form id="formAddBook">
+          <label for="titulo">Título</label>
+          <input id="titulo" name="titulo" type="text" required />
+
+          <label for="autor">Autor</label>
+          <input id="autor" name="autor" type="text" required />
+
+          <label for="anio">Año publicación</label>
+          <input id="anio" name="anio" type="number" min="0" max="2100" />
+
+          <button type="submit">Añadir</button>
+        </form>
+
+        <p id="msgForm" class="mensaje" aria-live="polite"></p>
+      </section>
+
+      <section id="busqueda-api" aria-label="Búsqueda en OpenLibrary">
+        <h2>Buscar libros (API)</h2>
+        <form id="formBuscar">
+          <label for="buscarTitulo">Título</label>
+          <input id="buscarTitulo" type="text" />
+          <button type="submit">Buscar</button>
+        </form>
+
+        <div id="loading" class="oculto" aria-live="polite">
+          Cargando resultados...
+        </div>
+
+        <ul id="resultadosBusqueda"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>2025 BookNest. Proyecto de MauroSH</p>
+    </footer>
+    <div
+      id="modalLogin"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="loginTitle"
+    >
+      <div class="modal-contenido">
+        <h2 id="loginTitle">Login</h2>
+        <form id="formLogin">
+          <label for="user">Usuario</label>
+          <input id="user" name="user" type="text" required />
+
+          <label for="pass">Contraseña</label>
+          <input id="pass" name="pass" type="password" required />
+
+          <button type="submit">Entrar</button>
+          <button type="button" id="btnCerrarModal">Cancelar</button>
+        </form>
+        <!-- El polite es para que quede algo mejor el texto porque sino queda fatal -->
+        <p id="msgLogin" class="mensaje" aria-live="polite"></p>
+      </div>
+    </div>
+  </body>
+</html>
