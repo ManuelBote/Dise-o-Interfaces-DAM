@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BookNest</title>
     <link rel="stylesheet" href="css/estilos.css" />
-    <script defer src="app.js"></script>
+    <script defer src="js/script.js"></script>
   </head>
   <body>
     <header>
@@ -24,7 +24,7 @@
         <div class="nav-right">
           <button id="btnLogin" aria-haspopup="dialog">Login</button>
           <img
-            src="images (1).png"
+            src="img/icono_user.png"
             alt="Usuario no autenticado"
             id="imgProfile"
           />
@@ -44,8 +44,6 @@
       <section id="catalogo" aria-label="Lista de libros">
         <h2>Catálogo</h2>
         <ul id="listaLibros">
-          <li>España en un buen rumbo - Algun Iluminao (4021)</li>
-          <li>Don Quijote de la Mancha - Miguel de Cervantes (1605)</li>
         </ul>
       </section>
 
@@ -105,7 +103,7 @@
           <button type="submit">Entrar</button>
           <button type="button" id="btnCerrarModal">Cancelar</button>
         </form>
-        <!-- El polite es para que quede algo mejor el texto porque sino queda fatal -->
+        
         <p id="msgLogin" class="mensaje" aria-live="polite"></p>
       </div>
     </div>

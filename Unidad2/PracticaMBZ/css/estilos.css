@@ -58,7 +58,7 @@ header {
 }
 
 #btnLogin {
-    background: #6c2bd9;
+    background: #0b679c;
     color: #fff;
     border: none;
     padding: 0.7rem 3rem;
@@ -68,7 +68,7 @@ header {
 
 #btnLogin:focus,
 #btnLogin:hover {
-    background: #8545f0;
+    background: #084b72;
 }
 
 #imgProfile {
