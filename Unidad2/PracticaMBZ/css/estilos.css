@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    background: #090b1f;
+    background: #060a2e;
     border-bottom: 1px solid #222;
 }
 
@@ -61,7 +61,7 @@ header {
     background: #6c2bd9;
     color: #fff;
     border: none;
-    padding: 0.4rem 0.9rem;
+    padding: 0.7rem 3rem;
     border-radius: 999px;
     cursor: pointer;
 }
@@ -72,8 +72,8 @@ header {
 }
 
 #imgProfile {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid #fff;
 }
