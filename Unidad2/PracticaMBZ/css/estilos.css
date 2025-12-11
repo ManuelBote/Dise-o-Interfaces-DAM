@@ -117,7 +117,7 @@ h2 {
 }
 
 .tarjeta-libro:hover{
-    animation: bounce 0.5s ease;
+    animation: bounce 0.5s ease both;
 }
 
 @keyframes bounce {
