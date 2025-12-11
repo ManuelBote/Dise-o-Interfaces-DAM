@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BookNest</title>
     <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="css/columnas.css">
     <script defer src="js/script.js"></script>
   </head>
   <body>
@@ -36,15 +37,13 @@
       <section class="intro">
         <h2>Tu biblioteca digital</h2>
         <p>
-          Gestiona tus libros favoritos, añade nuevos títulos y descubre
-          lecturas recomendadas.
+          Biblioteca en la que podras buscar, y añadir tus libros favoritos
         </p>
       </section>
 
       <section id="catalogo" aria-label="Lista de libros">
         <h2>Catálogo</h2>
-        <ul id="listaLibros">
-        </ul>
+        <div class="row" id="listaLibros"></div>
       </section>
 
       <section id="form-libro" aria-label="Formulario para añadir libros">
@@ -52,21 +51,24 @@
         <form id="formAddBook">
           <label for="titulo">Título</label>
           <input id="titulo" name="titulo" type="text" required />
-
+      
           <label for="autor">Autor</label>
           <input id="autor" name="autor" type="text" required />
-
+      
           <label for="anio">Año publicación</label>
           <input id="anio" name="anio" type="number" min="0" max="2100" />
-
+      
+          <label for="imagen">Imagen (url)</label>
+          <input id="imagen" name="imagen" type="text" />
+      
           <button type="submit">Añadir</button>
         </form>
-
+      
         <p id="msgForm" class="mensaje" aria-live="polite"></p>
       </section>
 
       <section id="busqueda-api" aria-label="Búsqueda en OpenLibrary">
-        <h2>Buscar libros (API)</h2>
+        <h2>Buscar libros por titulo</h2>
         <form id="formBuscar">
           <label for="buscarTitulo">Título</label>
           <input id="buscarTitulo" type="text" />
