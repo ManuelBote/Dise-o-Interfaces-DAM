@@ -20,6 +20,7 @@
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#catalogo">Catálogo</a></li>
           <li><a href="#form-libro">Añadir libro</a></li>
+          <li><a href="#busqueda">Buscar libros</a></li>
         </ul>
 
         <div class="nav-right">
@@ -60,6 +61,17 @@
       
           <label for="imagen">Imagen (url)</label>
           <input id="imagen" name="imagen" type="text" />
+
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" placeholder="Selecciona una categoria">
+            <option value="Fantasia">Fantasia</option>
+            <option value="Historia">Historia</option>
+            <option value="Ciencia ficcion">Ciencia ficción</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Drama">Drama</option>
+            <option value="romance">Romance</option>
+            <option value="Dia contra el cancer">Dia contra el cancer</option>
+          </select>
       
           <button type="submit">Añadir</button>
         </form>
@@ -67,7 +79,7 @@
         <p id="msgForm" class="mensaje" aria-live="polite"></p>
       </section>
 
-      <section id="busqueda-api" aria-label="Búsqueda en OpenLibrary">
+      <section id="busqueda" aria-label="Buscar libros por titulo">
         <h2>Buscar libros por titulo</h2>
         <form id="formBuscar">
           <label for="buscarTitulo">Título</label>

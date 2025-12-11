@@ -4,24 +4,28 @@ let catalogoLibros = [
   {
     titulo: "Don Quijote de la mancha",
     autor: "Miguel de Cervantes",
+    categoria: "Fantasia",
     anio: 1600,
     img: "img/img_libros/libro1.jpeg",
   },
   {
     titulo: "Lazarillo de tormes",
     autor: "Desconocido",
+    categoria: "Drama",
     anio: 1700,
     img: "img/img_libros/libro2.jpeg",
   },
   {
     titulo: "Geronimo Stilton",
     autor: "Elisabetta Dami",
+    categoria: "Dia contra el cancer",
     anio: 2010,
     img: "img/img_libros/libro3.jpeg",
   },
   {
     titulo: "Mortadelo y Filemon",
     autor: "Francisco Ibañez",
+    categoria: "Humor",
     anio: 2022,
     img: "img/img_libros/libro4.jpeg",
   }
@@ -34,17 +38,33 @@ function renderizarCatalogo() {
 
   catalogoLibros.forEach((libro) => {
     const caja = document.createElement("div");
-    caja.className = "col-e-4 col-t-4"; // hijo directo de .row
-    caja.innerHTML = `
-      <div class="tarjeta-libro">
+    caja.className = "col-e-4 col-t-6"; // hijo directo de .row
+    if (libro.categoria === "Dia contra el cancer") {
+      caja.innerHTML = `
+      <div class="tarjeta-libro cancer_book">
         <div class="info-libro">
           <h3>${libro.titulo}</h3>
+          <p><strong>Genero:</strong> ${libro.categoria}</p>
           <p><strong>Autor:</strong> ${libro.autor}</p>
           <p><strong>Año:</strong> ${libro.anio}</p>
         </div>
         <img src="${libro.img}" alt="Portada de ${libro.titulo}" onerror="this.style.display='none'" />
       </div>
     `;
+    } else{
+      caja.innerHTML = `
+        <div class="tarjeta-libro">
+          <div class="info-libro">
+            <h3>${libro.titulo}</h3>
+            <p><strong>Genero:</strong> ${libro.categoria}</p>
+            <p><strong>Autor:</strong> ${libro.autor}</p>
+            <p><strong>Año:</strong> ${libro.anio}</p>
+          </div>
+          <img src="${libro.img}" alt="Portada de ${libro.titulo}" onerror="this.style.display='none'" />
+        </div>
+      `;
+    }
+    
     listaLibros.appendChild(caja);
   });
 }
@@ -55,6 +75,7 @@ document.getElementById("formAddBook").addEventListener("submit", function (e) {
 
   const titulo = document.getElementById("titulo").value.trim();
   const autor = document.getElementById("autor").value.trim();
+  const categoria = document.getElementById("categoria").value.trim();
   const anio = parseInt(document.getElementById("anio").value);
   const inputImagen = document.getElementById("imagen");
   const rutaImagen = inputImagen.value.trim();
@@ -74,6 +95,7 @@ document.getElementById("formAddBook").addEventListener("submit", function (e) {
   const nuevoLibro = {
     titulo,
     autor,
+    categoria,
     anio,
     img: rutaImagen || "",
   };

@@ -116,6 +116,24 @@ h2 {
     height: 100%;
 }
 
+.tarjeta-libro:hover{
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+.cancer_book {
+    background: #f07676;
+    border: 2px solid #ce3b36;
+}
+
 .tarjeta-libro img {
     width: 100%;
     max-width: 220px;
@@ -124,6 +142,9 @@ h2 {
     margin-top: 0.5rem;
 }
 
+.cancer_book img {
+    border: 2px solid #ce3b36;
+}
 .info-libro h3 {
     margin-bottom: 0.25rem;
 }
@@ -156,6 +177,14 @@ input {
 input:focus {
     outline: 2px solid #ffffff;
     outline-offset: 2px;
+}
+
+select{
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.4rem;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #f9fafb;
 }
 
 #imagen {
